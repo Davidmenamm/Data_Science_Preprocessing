@@ -10,7 +10,7 @@ from ReadWrite import writeAll
 
 # find top hypothesis features
 # print results to file
-def findHypothesis(inputCleanDataSet, outputFolder, division, nSelected):
+def findHypothesis(inputCleanDataSet, outputFolder, division, nSelected, nFolds):
     # read dataset
     complete_df = pd.read_csv(inputCleanDataSet, engine='c')
     # only target
@@ -35,7 +35,7 @@ def findHypothesis(inputCleanDataSet, outputFolder, division, nSelected):
             features[chunks[count]], target, test_size=0.33, stratify=target)
         featureOption = features[chunks[count]]
         # test accurracy
-        acc = runClassifier(GaussianNB(), X_train, y_train, X_test, y_test)
+        acc = runClassifier(GaussianNB(), featureOption, target, nFolds)
         accuracies.append(acc)
         # counter
         count += 1
@@ -54,4 +54,5 @@ def findHypothesis(inputCleanDataSet, outputFolder, division, nSelected):
         subset_complete = subset.copy()
         subset_complete.insert(0, target.name, target.values)
         # print to csv and visualization
-        writeAll(fileCsv, fileVisual, subset_complete, subsetAcc)
+        writeAll(fileCsv, fileVisual, subset_complete,
+                 'ACC: ' + str(subsetAcc))

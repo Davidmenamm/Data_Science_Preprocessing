@@ -42,4 +42,4 @@ def coordinate():
                     path_correlation_features, path_correlation_features_visual, threshold)
     # 4) Hypothesis
     findHypothesis(path_correlation_features,
-                   path_hypothesis, 3, 3)
+                   path_hypothesis, 3, 5, 20)

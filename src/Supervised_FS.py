@@ -2,8 +2,8 @@
 
 # imports
 import pandas as pd
-from sklearn.feature_selection import chi2
-from sklearn.feature_selection import SelectKBest
+from sklearn.feature_selection import chi2, SelectKBest
+import scipy.stats
 from ReadWrite import writeAll
 
 
